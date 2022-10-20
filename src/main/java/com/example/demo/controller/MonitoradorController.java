@@ -33,7 +33,8 @@ public class MonitoradorController {
 
   @GetMapping
   public List<Monitorador> list() {
-    return monitoradorRepository.findAll();
+    List<Monitorador> monitoradors = monitoradorRepository.findAll();
+    return monitoradors;
   }
 
   @GetMapping("/{id}")

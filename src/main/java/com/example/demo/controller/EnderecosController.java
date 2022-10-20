@@ -19,7 +19,7 @@ import com.example.demo.repository.EnderecosRepository;
   @RequestMapping("/api/enderecos")
   public class EnderecosController {
 
-    private EnderecosRepository enderecosRepository;
+    private final EnderecosRepository enderecosRepository;
 
 
     public EnderecosController(EnderecosRepository enderecosRepository) {
