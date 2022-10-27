@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import com.example.demo.repository.EnderecosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,9 @@ public class MonitoradorController {
 
   @Autowired
   private MonitoradorRepository monitoradorRepository;
+
+  @Autowired
+  private EnderecosRepository enderecosRepository;
 
   @Autowired
   private EnderecosController enderecosController;
@@ -59,9 +63,15 @@ public class MonitoradorController {
             monitoradorRepository.save(monitorador);
     }
 
+ // @DeleteMapping("/{id}")
+  //  public void excluir(@PathVariable Long id){
+   //   monitoradorRepository.deleteById(id);
+ // }
+
   @DeleteMapping("/{id}")
-    public void excluir(@PathVariable Long id){
-      monitoradorRepository.deleteById(id);
-    }
+  public void excluir(@PathVariable Monitorador enderecos){
+    monitoradorRepository.delete(enderecos);
+  }
+
 }
 
