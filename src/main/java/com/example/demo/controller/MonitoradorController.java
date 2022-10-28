@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import com.example.demo.repository.EnderecosRepository;
+import com.example.demo.service.MonitoradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,57 +22,50 @@ import com.example.demo.repository.MonitoradorRepository;
 @RequestMapping("/api/monitorador")
 public class MonitoradorController {
 
-  @Autowired
-  private MonitoradorRepository monitoradorRepository;
 
   @Autowired
-  private EnderecosRepository enderecosRepository;
+  private MonitoradorService monitoradorService;
 
-  @Autowired
-  private EnderecosController enderecosController;
-
-
-  public MonitoradorController(MonitoradorRepository monitoradorRepository) {
-    this.monitoradorRepository = monitoradorRepository;
-  }
-
-  @GetMapping
-  public List<Monitorador> list() {
-    List<Monitorador> monitoradors = monitoradorRepository.findAll();
-    return monitoradors;
-  }
-
-  @GetMapping("/{id}")
-  public ResponseEntity<Monitorador> findById(@PathVariable Long id) {
-      return monitoradorRepository.findById(id)
-            .map(record -> ResponseEntity.ok().body(record))
-            .orElse(ResponseEntity.notFound().build());
-  }
+//
+//  @GetMapping
+//  public List<Monitorador> list() {
+//    List<Monitorador> monitoradores = monitoradorRepository.findAll();
+//    return monitoradores;
+//  }
+//
+//
+//  @GetMapping("/{id}")
+//  public ResponseEntity<Monitorador> findById(@PathVariable Long id) {
+//      return monitoradorRepository.findById(id)
+//            .map(record -> ResponseEntity.ok().body(record))
+//            .orElse(ResponseEntity.notFound().build());
+// }
 
   @PostMapping
-  public void salvar(@RequestBody Monitorador monitorador) {
-    monitoradorRepository.save(monitorador);
-    monitorador.getEnderecos().forEach(enderecos -> {
-      enderecos.setMonitorador(monitorador);
-      enderecosController.salvar(enderecos);
-    });
-  }
+  public ResponseEntity<?> salvar(@RequestBody Monitorador monitoradorAux) {
+    try{
+      Monitorador monitorador = monitoradorService.persist(monitoradorAux);
+      return ResponseEntity.ok(monitorador);
 
-  @PutMapping
-    public void alterar(@RequestBody Monitorador monitorador){
-        if(monitorador.getId() > 0)
-            monitoradorRepository.save(monitorador);
+    }catch (Exception e){
+      return ResponseEntity.badRequest().body(e.getMessage());
+
     }
 
- // @DeleteMapping("/{id}")
-  //  public void excluir(@PathVariable Long id){
-   //   monitoradorRepository.deleteById(id);
- // }
-
-  @DeleteMapping("/{id}")
-  public void excluir(@PathVariable Monitorador enderecos){
-    monitoradorRepository.delete(enderecos);
   }
+
+//  @PutMapping
+//    public void alterar(@RequestBody Monitorador monitorador){
+//        if(monitorador.getId() > 0)
+//            monitoradorRepository.save(monitorador);
+//    }
+//
+//  @DeleteMapping("/{id}")
+//    public void excluir(@PathVariable Long id){
+//      monitoradorRepository.deleteById(id);
+//  }
+
+
 
 }
 
