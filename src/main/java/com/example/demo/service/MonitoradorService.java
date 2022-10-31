@@ -6,6 +6,9 @@ import com.example.demo.repository.MonitoradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class MonitoradorService {
 
@@ -29,4 +32,14 @@ public class MonitoradorService {
 
         return monitorador;
     }
+
+    public List<Monitorador> findAll(){
+        return monitoradorRepository.findAll();
+    }
+
+    public Monitorador findById(Long id) {
+        Optional<Monitorador> obj = monitoradorRepository.findById(id);
+            return obj.get();
+    }
+
 }

@@ -26,20 +26,18 @@ public class MonitoradorController {
   @Autowired
   private MonitoradorService monitoradorService;
 
-//
-//  @GetMapping
-//  public List<Monitorador> list() {
-//    List<Monitorador> monitoradores = monitoradorRepository.findAll();
-//    return monitoradores;
-//  }
-//
-//
-//  @GetMapping("/{id}")
-//  public ResponseEntity<Monitorador> findById(@PathVariable Long id) {
-//      return monitoradorRepository.findById(id)
-//            .map(record -> ResponseEntity.ok().body(record))
-//            .orElse(ResponseEntity.notFound().build());
-// }
+  @GetMapping
+  public ResponseEntity<List<Monitorador>> findAll(){
+    List<Monitorador> list = monitoradorService.findAll();
+    return ResponseEntity.ok().body(list);
+  }
+
+
+  @GetMapping("/{id}")
+  public ResponseEntity<?> findById(@PathVariable Long id) {
+      Monitorador list = monitoradorService.findById(id);
+      return ResponseEntity.ok().body(list);
+ }
 
   @PostMapping
   public ResponseEntity<?> salvar(@RequestBody Monitorador monitoradorAux) {
