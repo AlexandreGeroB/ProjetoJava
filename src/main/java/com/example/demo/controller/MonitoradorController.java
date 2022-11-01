@@ -52,18 +52,17 @@ public class MonitoradorController {
 
   }
 
-//  @PutMapping
-//    public void alterar(@RequestBody Monitorador monitorador){
-//        if(monitorador.getId() > 0)
-//            monitoradorRepository.save(monitorador);
-//    }
-//
-//  @DeleteMapping("/{id}")
-//    public void excluir(@PathVariable Long id){
-//      monitoradorRepository.deleteById(id);
-//  }
+  @PutMapping("/{id}")
+    public ResponseEntity<Monitorador> update(@RequestBody Monitorador monitorador, @PathVariable Long id){
+        monitorador = monitoradorService.update(monitorador, id);
+        return ResponseEntity.noContent().build();
+    }
 
-
+  @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+      monitoradorService.delete(id);
+        return ResponseEntity.noContent().build();
+  }
 
 }
 
