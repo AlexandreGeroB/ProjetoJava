@@ -19,9 +19,9 @@ public class MonitoradorService {
     private EnderecosRepository enderecosRepository;
 
     public Monitorador persist(Monitorador monitoradorAux) throws Exception{
-//        if(monitoradorAux.getEnderecos() == null || monitoradorAux.getEnderecos().isEmpty()){
-//            throw new Exception("Endereço é obrigatorio");
-//        }
+        if(monitoradorAux.getEnderecos() == null || monitoradorAux.getEnderecos().isEmpty()){
+            throw new Exception("Endereço é obrigatorio");
+        }
 
         Monitorador monitorador = monitoradorRepository.save(monitoradorAux);
 
@@ -42,17 +42,4 @@ public class MonitoradorService {
             return obj.get();
     }
 
-    public Monitorador update(Monitorador monitorador, Long id) {
-        monitorador.setId(id);
-
-        return monitoradorRepository.save(monitorador);
-    }
-
-    public void delete(Long id) {
-        monitoradorRepository.deleteById(id);
-    }
-
-//    public void deleteEnd(Monitorador monitorador) {
-//        enderecosRepository.deleteById(monitorador);
-//    }
 }
