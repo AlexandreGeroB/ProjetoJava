@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import com.example.demo.model.Enderecos;
 import com.example.demo.repository.EnderecosRepository;
 import com.example.demo.service.MonitoradorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,12 @@ public class MonitoradorController {
       Monitorador list = monitoradorService.findById(id);
       return ResponseEntity.ok().body(list);
  }
+
+//    @GetMapping("/{id}/enderecos")
+//    public ResponseEntity<List<Enderecos>> findById(@PathVariable Long enderecos) {
+//        Monitorador list = monitoradorService.findById(enderecos);
+//        return (ResponseEntity<List<Enderecos>>) ResponseEntity.ok().body(list);
+//    }
 
   @PostMapping
   public ResponseEntity<?> salvar(@RequestBody Monitorador monitoradorAux) {

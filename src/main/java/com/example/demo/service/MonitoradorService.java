@@ -42,6 +42,7 @@ public class MonitoradorService {
             return obj.get();
     }
 
+
     public Monitorador update(Monitorador monitorador, Long id) {
         monitorador.setId(id);
 
